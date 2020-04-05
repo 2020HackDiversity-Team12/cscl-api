@@ -2,16 +2,19 @@
 
 Restful API for the cscl client application
 
-## Stacks
+# Stacks
 
+- <b>Git</b>: Version Control
+- <b>VirtualBox</b>: Virtualization Platform
+- <b>Vagrant</b>: Virtual Machine Management
 - <b>Python(v3)</b>: Programming Language
 - <b>Flask</b>: Micro Web Framework
-- <b>MongoDB</b>: Database
+- <b>MongoDB</b>: Nosql Database
 - <b>MongoEngine</b>: Object Document Mapper
 
 # Installation
 
-A virtual environemnet has been configure with vagrant
+A virtual development environment has been configured with vagrant
 
 1. Download <a href="https://git-scm.com/downloads" target="_blank">Git</a>, <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank">VirtualBox</a> and <a href="https://www.vagrantup.com/downloads.html" target="_blank">Vagrant</a>
 2. Launch terminal and run the following commands
@@ -42,7 +45,7 @@ A virtual environemnet has been configure with vagrant
 python3 main.py
 ```
 
-## Endpoints
+# Endpoints
 
 | Route         | Method | Params                | Body                                            | Description          | Payload            |
 | ------------- | ------ | --------------------- | ----------------------------------------------- | -------------------- | ------------------ |
