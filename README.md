@@ -8,6 +8,7 @@ Restful API for the cscl client application
 - <b>VirtualBox</b>: Virtualization Platform
 - <b>Vagrant</b>: Virtual Machine Management
 - <b>Python(v3)</b>: Programming Language
+- <b>Pipenv</b>: Dependency managers
 - <b>Flask</b>: Micro Web Framework
 - <b>MongoDB</b>: Nosql Database
 - <b>MongoEngine</b>: Object Document Mapper
@@ -39,7 +40,19 @@ A virtual development environment has been configured with vagrant
 - cd /hackdiv-team12
 ```
 
-3- Execute the main.py file
+3- create active environemnt
+
+```
+pipenv shell
+```
+
+4- Install app dependencies
+
+```
+pipenv install
+```
+
+5- Run server
 
 ```
 python3 main.py
@@ -76,7 +89,8 @@ Book
 
 ## Todo
 
-- [ ] setup base project structure
+- [x] add readme file
+- [x] setup base project structure
 - [ ] setup MongoDB server in cloud
 - [ ] create book endpoints
 - [ ] create search endpoint
