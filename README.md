@@ -55,7 +55,7 @@ pipenv install
 5- Run server
 
 ```
-python3 main.py
+flask run -h 0.0.0.0
 ```
 
 # Endpoints
