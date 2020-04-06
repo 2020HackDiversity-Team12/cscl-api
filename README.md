@@ -90,7 +90,7 @@ Book
 ## Todo
 
 - [x] add readme file
-- [x] setup base project structure
+- [x] setup project skeleton
 - [ ] setup MongoDB server in cloud
 - [ ] create book endpoints
 - [ ] create search endpoint
