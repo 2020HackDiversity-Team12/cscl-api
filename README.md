@@ -40,13 +40,13 @@ A virtual development environment has been configured with vagrant
 - cd /hackdiv-team12
 ```
 
-3- create active environemnt
+3- Create active environemnt
 
 ```
 pipenv shell
 ```
 
-4- Install app dependencies
+4- Install packages dependencies
 
 ```
 pipenv install
@@ -69,7 +69,7 @@ python3 main.py
 | /books/bookID | DELETE | none                  | {title, author, isbn, copies, publication_year} | delete target book   | bookID             |
 | /search       | GET    | q                     | none                                            | search in database   | books, next, total |
 
-## Data Object Model
+## Resource
 
 ```
 Book
@@ -96,3 +96,8 @@ Book
 - [ ] create search endpoint
 - [ ] CRUD book
 - [ ] deploy application
+
+#### Useful Links
+
+- [Restful API](https://mlsdev.com/blog/81-a-beginner-s-tutorial-for-understanding-restful-api)
+- [Git](https://rogerdudler.github.io/git-guide/)
