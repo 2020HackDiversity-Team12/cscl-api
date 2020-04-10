@@ -1,7 +1,9 @@
 import database
 import database.models as models
 import helpers
-from flask import Flask, make_response, jsonify
+from flask import Flask, make_response, jsonify, abort
+from werkzeug import exceptions as w_exceptions
+
 
 app = Flask(__name__)
 
@@ -13,24 +15,27 @@ app.config['MONGODB_SETTINGS'] = {
 
 database.init(app)
 
-
-# ERROR HANDLER
-@app.errorhandler(404)
-def resource_not_found(e):
-    return make_response(
-        jsonify({
-            'status': 404,
-            'text': 'resource not found'
-        }), 404)
+# ###########################
+#  HTTP ERROR HANDLER       #
+# ###########################
 
 
-@app.errorhandler(405)
-def method_not_allowed(e):
-    return make_response(
-        jsonify({
-            'status': 405,
-            'text': 'method not allowed'
-        }), 405)
+@app.errorhandler(w_exceptions.BadRequest)
+def bad_request(err):
+    resp = jsonify({'status': err.code, 'text': 'bad request'})
+    return make_response(resp, err.code)
+
+
+@app.errorhandler(w_exceptions.NotFound)
+def not_found(err):
+    resp = jsonify({'status': err.code, 'text': 'resource not found'})
+    return make_response(resp, err.code)
+
+
+@app.errorhandler(w_exceptions.MethodNotAllowed)
+def method_not_allowed(err):
+    resp = jsonify({'status': err.code, 'text': 'method not allowed'})
+    return make_response(resp, err.code)
 
 
 # ######################
