@@ -12,7 +12,7 @@ def get_all():
 
 def get(isbn):
     ''' '''
-    return User.objects(isbn=isbn)
+    return Book.objects(isbn=isbn)
 
 
 def create(book):

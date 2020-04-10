@@ -5,7 +5,10 @@ from database import db
 
 
 class Book(db.Document):
-    isbn = db.StringField(required=True)
+
+    meta = {'collection': 'books'}
+
+    isbn = db.StringField(required=True, unique=True)
     title = db.StringField(required=True)
     author = db.StringField(required=True)
     publisher = db.StringField(required=True)
