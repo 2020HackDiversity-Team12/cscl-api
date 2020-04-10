@@ -15,7 +15,7 @@ def get(isbn):
     return User.objects(isbn=isbn)
 
 
-def create(book, **kwargs):
+def create(book):
     ''' '''
 
     return Book(**book).save()

@@ -1,4 +1,5 @@
 import database
+import service
 from flask import Flask, make_response, jsonify
 
 app = Flask(__name__)
@@ -9,6 +10,20 @@ app.config['MONGODB_SETTINGS'] = {
 }
 
 database.init(app)
+
+book = {
+    "isbn": "0195153448",
+    "title": "Classical Mythology",
+    "author": "Mark P. O. Morford",
+    "publication_year": 2002,
+    "publisher": "Oxford University Press",
+    "image_url_s": "http://images.amazon.com/images/P/0195153448.01.THUMBZZZ.jpg",
+    "image_url_m": "http://images.amazon.com/images/P/0195153448.01.MZZZZZZZ.jpg",
+    "image_url_l": "http://images.amazon.com/images/P/0195153448.01.LZZZZZZZ.jpg",
+    "copies": 2,
+    "available": 0
+}
+
 
 # ERROR HANDLER
 @app.errorhandler(404)
@@ -50,7 +65,7 @@ def get_books():
 def create_book():
     ''' '''
 
-    return 'create new book'
+    return jsonify(service.create(book))
 
 
 @app.route('/api/books/<string:book_id>', methods=['GET'])
