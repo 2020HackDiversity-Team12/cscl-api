@@ -1,5 +1,5 @@
 import database
-import service
+import database.models as models
 import helpers
 from flask import Flask, make_response, jsonify
 
@@ -71,7 +71,3 @@ def update_book(book_id):
 def remove_book(book_id):
     ''' '''
     pass
-
-
-if __name__ == '__main__':
-    app.run(host="0.0.0.0", port="8000", debug=True)
