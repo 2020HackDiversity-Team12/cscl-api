@@ -107,8 +107,8 @@ def create_book():
     return 'create book record'
 
 
-@app.route('/api/books/<string:book_id>', methods=['GET'])
-def get_book(book_id):
+@app.route('/api/books/<string:isbn>', methods=['GET'])
+def get_book(isbn):
     """
      Retrieve a specific book record by it's ISBN 
      ---------------------------------------------
@@ -126,11 +126,11 @@ def get_book(book_id):
 
     """
 
-    return f'Retrieve book record isbn:{book_id}'
+    return f'Retrieve book record isbn:{isbn}'
 
 
-@app.route('/api/books/<string:book_id>', methods=['PUT'])
-def update_book(book_id):
+@app.route('/api/books/<string:isbn>', methods=['PUT'])
+def update_book(isbn):
     """
      Update a specific book record by it's ISBN 
      ------------------------------------------
@@ -154,11 +154,11 @@ def update_book(book_id):
         200: return book id
     """
 
-    return f'update book ISBN: {book_id}'
+    return f'update book ISBN: {isbn}'
 
 
-@app.route('/api/books/<string:book_id>', methods=['DELETE'])
-def remove_book(book_id):
+@app.route('/api/books/<string:isbn>', methods=['DELETE'])
+def remove_book(isbn):
     """
      Update a specific book record by it's ISBN 
      ------------------------------------------
@@ -170,4 +170,4 @@ def remove_book(book_id):
         200: return book id
     """
 
-    return f'delete book isbn: {book_id}'
+    return f'delete book isbn: {isbn}'
