@@ -1,17 +1,12 @@
 import database
+import config
+import service
 import database.models as models
-import helpers
 from flask import Flask, make_response, jsonify, abort
 from werkzeug import exceptions as w_exceptions
 
-
 app = Flask(__name__)
-
-app.config['MONGODB_SETTINGS'] = {
-    'db': 'cscl_test',
-    'host': 'localhost',
-    'port': 27017
-}
+app.config.from_object(config.DevConfig)
 
 database.init(app)
 
@@ -48,15 +43,15 @@ def search():
      Retreive `SIZE_LIMIT` book records based on `q` param
      -----------------------------------------------------
 
-     Endpoints:
-        GET /search?q={book_isbn_or_book_title}
+      Endpoints:
+         GET /search?q={book_isbn_or_book_title}
 
-     @QueryParams:
-        q: (required) query 
+      @QueryParams:
+         q: (required) query
 
-     @Response:
-        books: return `SIZE_LIMIT` books that macth the query
-        next: url to list the next `SIZE_LIMIT` book records
+      @Response:
+         books: return `SIZE_LIMIT` books that macth the query
+         next: url to list the next `SIZE_LIMIT` book records
     """
 
     return f'search in database'
@@ -65,22 +60,22 @@ def search():
 @app.route('/api/books', methods=['GET'])
 def get_books():
     """
-     Retreive `SIZE_LIMIT` book records 
-     ----------------------------------
+    Retreive `SIZE_LIMIT` book records
+    ----------------------------------
 
-      Endpoints:
-        GET /books
-        GET /books?lastid={last_book_id}
+    Endpoints:
+       GET /books
+       GET /books?lastid={last_book_id}
 
-     @QueryParams:
-        lastid: (optional) last book id to implement forward paging system
+    @QueryParams:
+       lastid: (optional) last book id to implement forward paging system
 
-     @Response:
-        books: return `SIZE_LIMIT` books
-        next: url to list the next `SIZE_LIMIT` book records
+    @Response:
+       books: return `SIZE_LIMIT` books
+       next: url to list the next `SIZE_LIMIT` book records
     """
 
-    return 'Retreive n book records '
+    return jsonify(models.Book.objects())
 
 
 @app.route('/api/books', methods=['POST'])
@@ -103,7 +98,6 @@ def create_book():
      @Response:
         200: return book ID
     """
-
     return 'create book record'
 
 
