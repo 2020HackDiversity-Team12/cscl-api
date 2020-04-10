@@ -33,7 +33,7 @@ def method_not_allowed(e):
 #  ENDPOINTS    #
 # ###############
 @app.route('/api/search', methods=['GET'])
-def get_books():
+def search():
     ''' '''
 
     return 'search'
