@@ -7,9 +7,6 @@ fake = Faker()
 
 
 class Provider(BaseProvider):
-
-    ''' Doctype '''
-
     def book(self):
         MAX_COPIES = 5
         book = {
