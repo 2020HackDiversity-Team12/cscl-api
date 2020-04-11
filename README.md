@@ -62,7 +62,7 @@ flask run -h 0.0.0.0
 | Route       | Method | Params                | Body                                            | Description                          | Payload     |
 | ----------- | ------ | --------------------- | ----------------------------------------------- | ------------------------------------ | ----------- |
 | /search     | GET    | q                     | none                                            | Search in database                   | books, next |
-| /books      | GET    | none                  | none                                            | Retreive lisiting of available books | books, next |
+| /books      | GET    | none                  | none                                            | Retrieve lisiting of available books | books, next |
 | /books      | POST   | none                  | {title, author, isbn, copies, publication_year} | Create a new book                    | bookID      |
 | /books/isbn | GET    | act(borrow\|handback) | none                                            | Retrieve a single book by it's ISBN  | book        |
 | /books/isbn | PUT    | none                  | {title, author, isbn, copies, publication_year} | Update book by it's ISBN             | bookID      |
