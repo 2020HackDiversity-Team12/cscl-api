@@ -4,7 +4,6 @@ Restful API for the cscl client application
 
 # Stacks
 
-- <b>Git</b>: Version Control
 - <b>VirtualBox</b>: Virtualization Platform
 - <b>Vagrant</b>: Virtual Machine Management
 - <b>Python(v3)</b>: Programming Language
@@ -60,14 +59,14 @@ flask run -h 0.0.0.0
 
 # Endpoints
 
-| Route         | Method | Params                | Body                                            | Description          | Payload            |
-| ------------- | ------ | --------------------- | ----------------------------------------------- | -------------------- | ------------------ |
-| /books        | GET    | none                  | none                                            | retreive all books   | books, next, total |
-| /books        | POST   | none                  | {title, author, isbn, copies, publication_year} | add new book         | bookID             |
-| /books/bookID | GET    | act(borrow\|handback) | none                                            | retreive target book | book, action       |
-| /books/bookID | PUT    | none                  | {title, author, isbn, copies, publication_year} | update target book   | bookID             |
-| /books/bookID | DELETE | none                  | {title, author, isbn, copies, publication_year} | delete target book   | bookID             |
-| /search       | GET    | q                     | none                                            | search in database   | books, next, total |
+| Route       | Method | Params                | Body                                            | Description                          | Payload     |
+| ----------- | ------ | --------------------- | ----------------------------------------------- | ------------------------------------ | ----------- |
+| /search     | GET    | q                     | none                                            | Search in database                   | books, next |
+| /books      | GET    | none                  | none                                            | Retreive lisiting of available books | books, next |
+| /books      | POST   | none                  | {title, author, isbn, copies, publication_year} | Create a new book                    | bookID      |
+| /books/isbn | GET    | act(borrow\|handback) | none                                            | Retrieve a single book by it's ISBN  | book        |
+| /books/isbn | PUT    | none                  | {title, author, isbn, copies, publication_year} | Update book by it's ISBN             | bookID      |
+| /books/isbn | DELETE | none                  | {title, author, isbn, copies, publication_year} | Delete a book                        | bookID      |
 
 ## Resource
 
@@ -91,10 +90,10 @@ Book
 
 - [x] add readme file
 - [x] setup project skeleton
-- [ ] setup MongoDB server in cloud
-- [ ] create book endpoints
-- [ ] create search endpoint
-- [ ] CRUD book
+- [x] setup app configuration
+- [x] setup MongoDB server in cloud
+- [ ] create endpoints
+- [x] create model
 - [ ] deploy application
 
 #### Useful Links
