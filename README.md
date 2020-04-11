@@ -93,7 +93,8 @@ Book
 - [x] setup app configuration
 - [x] setup MongoDB server in cloud
 - [ ] create endpoints
-- [x] create model
+- [ ] test endpoints
+- [x] create book model
 - [ ] deploy application
 
 #### Useful Links
