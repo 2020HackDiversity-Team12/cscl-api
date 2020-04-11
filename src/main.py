@@ -40,7 +40,7 @@ def method_not_allowed(err):
 @app.route('/api/search', methods=['GET'])
 def search():
     """
-     Retreive `SIZE_LIMIT` book records based on `q` param
+     Retrieve `SIZE_LIMIT` book records based on `q` param
      -----------------------------------------------------
 
       Endpoints:
@@ -60,7 +60,7 @@ def search():
 @app.route('/api/books', methods=['GET'])
 def get_books():
     """
-    Retreive `SIZE_LIMIT` book records
+    Retrieve `SIZE_LIMIT` available book records
     ----------------------------------
 
     Endpoints:
