@@ -1,5 +1,5 @@
-from flask import Blueprint, abort
-
+from flask import Blueprint, abort, jsonify
+import database.models as models
 
 books = Blueprint('books', __name__)
 
@@ -47,8 +47,7 @@ def get_books():
       next: url to list the next `SIZE_LIMIT` book records
 
     """
-
-    return 'retrieve all available books'
+    return 'get book'
 
 
 @books.route('/api/books', methods=['POST'])
