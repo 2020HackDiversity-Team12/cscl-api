@@ -27,7 +27,7 @@ def search():
 
     """
 
-    book = Book.objects().limit(50)
+    book = Book.objects().limit(5)
     return jsonify(book)
 
 
@@ -50,7 +50,7 @@ def get_books():
 
     """
   # add forward paging sysytem
-    book = Book.objects()
+    book = Book.objects().limit(30)
     return jsonify(book)
 
 # Validate books that are created by client (Should we require the images??????)
