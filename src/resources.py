@@ -1,6 +1,6 @@
 from flask import Blueprint, abort, jsonify, request, Response
 from database.models import Book
-
+import re 
 
 books = Blueprint('books', __name__)
 
@@ -26,9 +26,14 @@ def search():
       next: url to list the next `SIZE_LIMIT` book records
 
     """
-
-    book = Book.objects().limit(50)
-    return jsonify(book)
+    try:
+      q = request.args.get("q")
+      regex = re.compile(f'.*{q}.*')
+      book = Book.objects(title=regex)      
+     
+      return jsonify(book)     
+    except:
+      return jsonify({"Error": "Bad query"})
 
 
 @books.route('/api/books', methods=['GET'])
@@ -50,8 +55,9 @@ def get_books():
 
     """
   ##add forward paging sysytem
-    book = Book.objects()
+    book = Book.objects().limit(3)
     return jsonify(book)
+  
 
 #Validate books that are created by client (Should we require the images??????)
 def ValidateBook(bookObject):
