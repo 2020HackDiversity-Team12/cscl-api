@@ -6,7 +6,7 @@ from database import db
 
 class Book(db.Document):
 
-    meta = {'collection': 'books'}
+    meta = {'collection': 'Books'}
 
     isbn = db.StringField(required=True, unique=True)
     title = db.StringField(required=True)
