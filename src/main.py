@@ -4,7 +4,7 @@ import resources
 from flask import Flask, Blueprint, make_response, jsonify
 from werkzeug import exceptions as w_exceptions
 
-app = Flask(__name__)
+application = app = Flask(__name__)
 
 app.config.from_object(config.ProdConfig)
 app.register_blueprint(resources.books)
