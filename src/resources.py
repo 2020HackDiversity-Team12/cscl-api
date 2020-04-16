@@ -27,8 +27,14 @@ def search():
 
     """
 
-    book = Book.objects().limit(5)
-    return jsonify(book)
+    try:
+        q = request.args.get("q")
+        regex = re.compile(f'.*{q}.*')
+        book = Book.objects(title=regex)
+
+        return jsonify(book)
+    except:
+        return jsonify({"Error": "Bad query"})
 
 
 @books.route('/api/books', methods=['GET'])
@@ -50,7 +56,7 @@ def get_books():
 
     """
   # add forward paging sysytem
-    book = Book.objects().limit(30)
+    book = Book.objects.order_by("-_id").limit(30)
     return jsonify(book)
 
 # Validate books that are created by client (Should we require the images??????)
@@ -94,9 +100,9 @@ def create_book():
             "publisher": entry["publisher"],
             "publication_year": entry["publication_year"],
             "copies": entry["copies"],
-            "image_url_s": entry["image_url_s"],
-            "image_url_m": entry["image_url_m"],
-            "image_url_l": entry["image_url_l"]
+            # "image_url_s": entry["image_url_s"],
+            # "image_url_m": entry["image_url_m"],
+            # "image_url_l": entry["image_url_l"]
         }
         newBook["available"] = newBook["copies"]
         Book(**newBook).save()
@@ -190,7 +196,10 @@ def remove_book(isbn):
 
     """
     try:
-        Book.objects.get(isbn=isbn).delete()
+        book = Book.objects.get(isbn=isbn)
+        isbn = book.isbn
+        book.delete()
+        return jsonify({'success': True, 'isbn': isbn})
     except:
         return jsonify({"Error": "Invalid isbn"})
 

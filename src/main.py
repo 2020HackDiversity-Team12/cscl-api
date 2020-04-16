@@ -19,11 +19,12 @@ database.init(app)
 @app.after_request
 def add_headers(response):
     response.headers.add('Access-Control-Allow-Origin', '*')
-    response.headers.add('Access-Control-Allow-Methods', 'POST')
+    response.headers.add('Access-Control-Allow-Methods',
+                         'GET, POST, PUT, DELETE')
     response.headers.add('Access-Control-Allow-Headers',
-                         'x-requested-with,Content-Type,Authorization')
+                         'x-requested-with,Content-Type')
     response.headers.add('Access-Control-Expose-Headers',
-                         'Content-Type,Content-Length,Authorization,X-Pagination')
+                         'Content-Type,Content-Length')
     return response
 
 
