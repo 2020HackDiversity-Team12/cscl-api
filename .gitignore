@@ -1,7 +1,6 @@
 # Custom
 /.vagrant
 *.pyc
-*.lock
 *.flaskenv
 
 # Byte-compiled / optimized / DLL files
