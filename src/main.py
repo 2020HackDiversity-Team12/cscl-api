@@ -48,3 +48,7 @@ def not_found(err):
 def method_not_allowed(err):
     resp = jsonify({'status': err.code, 'text': 'method not allowed'})
     return make_response(resp, err.code)
+
+
+if __name__ == "__main__":
+    app.run()
