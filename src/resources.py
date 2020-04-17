@@ -1,8 +1,12 @@
 from flask import Blueprint, abort, jsonify, request, Response
 from database.models import Book
+import helpers
+import service
 
 
 books = Blueprint('books', __name__)
+
+HOST = 'localhost:8000'
 
 # ######################
 #  BOOK ENDPOINTS      #
@@ -55,9 +59,23 @@ def get_books():
       next: url to list the next `SIZE_LIMIT` book records
 
     """
-  # add forward paging sysytem
-    book = Book.objects.order_by("-_id").limit(30)
-    return jsonify(book)
+
+    books = None
+    book_lastid = None
+    param_lastid = request.args.get("lastid")
+
+    if(param_lastid):
+        books = Book.objects(id__lt=param_lastid).order_by("-_id").limit(5)
+    else:
+        books = Book.objects().order_by("-_id").limit(5)
+
+    try:
+        book_lastid = books[len(books) - 1].id
+    except Exception:
+        pass
+
+    next = f'{HOST}/api/books?lastid={book_lastid}' if book_lastid else None
+    return jsonify({'books': books, 'next': next})
 
 # Validate books that are created by client (Should we require the images??????)
 
@@ -73,7 +91,7 @@ def ValidateBook(bookObject):
 @books.route('/api/books', methods=['POST'])
 def create_book():
     """
-    Create a book record 
+    Create a book record
     --------------------
 
     Endpoints:
@@ -114,16 +132,16 @@ def create_book():
 @books.route('/api/books/<string:isbn>', methods=['GET'])
 def get_book(isbn):
     """
-    Retrieve a specific book record by it's ISBN 
+    Retrieve a specific book record by it's ISBN
     ---------------------------------------------
 
     Endpoints:
       GET /books/isbn
-      GET /books/isbn?act=(borrow|handback) 
+      GET /books/isbn?act=(borrow|handback)
 
-    @QueryParams: 
-      act: (optional) specific action on book 
-            Possible values: borrow, handback 
+    @QueryParams:
+      act: (optional) specific action on book
+            Possible values: borrow, handback
 
     @Response:
       200: return book record
@@ -150,7 +168,7 @@ def get_book(isbn):
 @books.route('/api/books/<string:isbn>', methods=['PUT'])
 def update_book(isbn):
     """
-    Update a specific book record by it's ISBN 
+    Update a specific book record by it's ISBN
     ------------------------------------------
 
     Endpoints:
@@ -185,7 +203,7 @@ def update_book(isbn):
 @books.route('/api/books/<string:isbn>', methods=['DELETE'])
 def remove_book(isbn):
     """
-    Update a specific book record by it's ISBN 
+    Update a specific book record by it's ISBN
     ------------------------------------------
 
     Endpoints:
@@ -204,3 +222,29 @@ def remove_book(isbn):
         return jsonify({"Error": "Invalid isbn"})
 
     return "Book Has been deleted"
+
+
+@books.route('/api/seed/<int:n>', methods=['GET'])
+def seed_database(n):
+    """
+    POPULATE DB WITH FAKE DATA
+    ------------------------------------------
+
+    Endpoints:
+      DELETE /seed/
+
+    @Response:
+      200: BOOKS CREATED
+
+    """
+
+    message = None
+
+    try:
+        books = helpers.fake_book(int(n))
+        [service.create(book) for book in books]
+        message = 'books created'
+    except Exception:
+        message = 'error while populating db'
+    finally:
+        return message

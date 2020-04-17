@@ -6,10 +6,11 @@ from werkzeug import exceptions as w_exceptions
 
 app = Flask(__name__)
 
-app.config.from_object(config.ProdConfig)
+app.config.from_object(config.DevConfig)
 app.register_blueprint(resources.books)
 
 database.init(app)
+
 
 ############################
 # CORS                     #
