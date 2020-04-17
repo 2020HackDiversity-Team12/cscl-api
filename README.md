@@ -92,10 +92,10 @@ Book
 - [x] setup project skeleton
 - [x] setup app configuration
 - [x] setup MongoDB server in cloud
-- [ ] create endpoints
-- [ ] test endpoints
+- [x] create endpoints
+- [x] test endpoints
 - [x] create book model
-- [ ] deploy application
+- [x] deploy application
 
 #### Useful Links
 
