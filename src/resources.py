@@ -2,11 +2,12 @@ from flask import Blueprint, abort, jsonify, request, Response
 from database.models import Book
 import helpers
 import service
+import re
 
 
 books = Blueprint('books', __name__)
 
-HOST = 'localhost:8000'
+HOST = 'https://api-cscl.herokuapp.com'
 
 # ######################
 #  BOOK ENDPOINTS      #
@@ -34,7 +35,7 @@ def search():
     try:
         q = request.args.get("q")
         regex = re.compile(f'.*{q}.*')
-        book = Book.objects(title=regex)
+        book = Book.objects(title=regex).limit(30)
 
         return jsonify(book)
     except:
@@ -65,9 +66,9 @@ def get_books():
     param_lastid = request.args.get("lastid")
 
     if(param_lastid):
-        books = Book.objects(id__lt=param_lastid).order_by("-_id").limit(5)
+        books = Book.objects(id__lt=param_lastid).order_by("-_id").limit(30)
     else:
-        books = Book.objects().order_by("-_id").limit(5)
+        books = Book.objects().order_by("-_id").limit(30)
 
     try:
         book_lastid = books[len(books) - 1].id
